@@ -1,0 +1,28 @@
+{
+    "name": "simon/filter",
+    "description": "filter xss or other .",
+    "type": "library",
+    "keywords": ["filter", "laravel","htmlpurifier"],
+    "homepage": "https://github.com/hiword/filter",
+    "authors": [
+        {
+            "name": "simon",
+            "email": "28737164@qq.com",
+            "homepage": "http://crcms.cn"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ezyang/htmlpurifier":"~4.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Filter\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
