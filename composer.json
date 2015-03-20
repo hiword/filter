@@ -2,7 +2,7 @@
     "name": "simon/filter",
     "description": "filter xss or other .",
     "type": "library",
-    "keywords": ["filter", "laravel","htmlpurifier"],
+    "keywords": ["filter", "crcms","htmlpurifier"],
     "homepage": "https://github.com/hiword/filter",
     "authors": [
         {
