@@ -3,15 +3,13 @@ namespace Filter;
 class Filters {
 	
 	protected $filter;
-	protected $data;
 	
-	public function __construct(FilterInterface $filter,$data) {
+	public function __construct(FilterInterface $filter) {
 		$this->filter = $filter;
-		$this->data = $data;
 	}
 
-	public function filter() {
-		return $this->filter->filter($this->data);
+	public function filter($data) {
+		return $this->filter->filter($data);
 	}
 	
 }
