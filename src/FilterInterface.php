@@ -2,6 +2,6 @@
 namespace Filter;
 interface FilterInterface {
 	
-	public function filter();
+	public function filter($data);
 	
 }
