@@ -4,8 +4,12 @@ namespace Filter\Component;
 use Filter\FilterInterface;
 class XssEditor implements FilterInterface {
 	
-	public function filter(array $data) {
+	public function filters(array $data) {
 		
 	}
 	
+	public function filter($data)
+	{
+		
+	}
 }
