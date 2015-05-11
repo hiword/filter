@@ -10,7 +10,7 @@ class Shell implements FilterInterface  {
 	public function filters(array $data) {
 		
 		foreach ($data as &$item) {
-			$item = is_array($item) ? $this->filter($item) : $this->filter($item);
+			$item = is_array($item) ? $this->filters($item) : $this->filter($item);
 		}
 		return $data;
 	}
