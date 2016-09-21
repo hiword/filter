@@ -1,8 +1,8 @@
 {
     "name": "simon/filter",
-    "description": "filter xss or other .",
+    "description": "filter xss or shell or other .",
     "type": "library",
-    "keywords": ["filter", "crcms","htmlpurifier"],
+    "keywords": ["filter", "crcms","laravel","php"],
     "homepage": "https://github.com/hiword/filter",
     "authors": [
         {
@@ -19,9 +19,7 @@
             "Simon\\Filter\\": "src/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
-    }
+    "version": "2.0.0",
+    "minimum-stability":"beta"
+
 }
