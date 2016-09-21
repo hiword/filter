@@ -8,20 +8,33 @@
 
 namespace Simon\Filter;
 use Illuminate\Support\ServiceProvider;
+use Simon\Filter\Drives\XssFilter;
 
 
 class FilterServiceProvider extends ServiceProvider
 {
+
+    protected $defer = true;
+
 
     public function boot()
     {
 
     }
 
+
     public function register()
     {
+        $request = $this->app['request'];
+
         //
-//        $this->app
+        $this->app->singleton([Input::class=>'input'],function () use ($request){
+            return new Input($request->all(),new XssFilter());
+        });
     }
 
+    public function provides()
+    {
+        return ['input'];
+    }
 }

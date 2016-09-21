@@ -21,9 +21,14 @@ class XssFilter implements FilterInterface
 
     public function filter(string $var) : string
     {
-        return $var;
         // TODO: Implement filter() method.
-//        return clean($var,$this->config);
+
+        return $this->xssClean($var);
+    }
+
+    protected function xssClean(string $var) : string
+    {
+        return strip_tags($var);
     }
 
 }

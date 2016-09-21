@@ -34,6 +34,8 @@ class Input
 
     public function except($key)
     {
+        $key = (array)$key;
+
         $key = array_combine($key,$key);
 
         return array_diff_key($this->data,$key);
@@ -51,17 +53,13 @@ class Input
         return $this->input($name);
     }
 
+
     protected function clean(array $data)
     {
         return array_map(function($value) use ($data){
+            $value = trim($value);
             return is_array($value) ? $this->clean($value) : $this->filter->filter($value);
         },$data);
-
-
-//        foreach ($data as &$value)
-//        {
-//            $value = is_array($value) ? $this->clean($value) : $this->filter->filter($value);
-//        }
     }
 
 }
