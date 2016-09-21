@@ -12,27 +12,46 @@ namespace Simon\Filter;
 
 class Input
 {
+    /**
+     * 数据组
+     * @var array
+     */
     protected $data = [];
 
-    protected $filter = null;
-
-    public function __construct(array $data,FilterInterface $filter = null)
+    /**
+     * Input constructor.
+     * @param array $data
+     */
+    public function __construct(array $data)
     {
         $this->data = $data;
-
-        if ($filter) $this->bind($filter);
     }
 
+    /**
+     * 获取所有数据
+     * @return array
+     */
     public function all()
     {
         return $this->data;
     }
 
+    /**
+     * 获取指定数据
+     * @param $key
+     * @param null $default
+     * @return mixed|null
+     */
     public function input($key,$default = null)
     {
         return $this->data[$key] ?? $default;
     }
 
+    /**
+     * 获取除此key之后的数据
+     * @param $key
+     * @return array
+     */
     public function except($key)
     {
         $key = (array)$key;
@@ -42,37 +61,47 @@ class Input
         return array_diff_key($this->data,$key);
     }
 
-    public function bind(FilterInterface $filter) : Input
+    /**
+     * 过滤组件
+     * @param FilterInterface $filter
+     * @return Input
+     */
+    public function filter(FilterInterface $filter) : Input
     {
-        $this->filter = $filter;
-
-        $this->filter();
+        $this->filterHandle($filter);
 
         return $this;
     }
 
-    public function instance(array $data,FilterInterface $filter = null)
+    /**
+     * instance
+     * @param array $data
+     * @return Input
+     */
+    public function instance(array $data)
     {
-        return new self($data,$filter);
+        return new self($data);
     }
 
-    protected function filter()
+    /**
+     * 过滤核心处理
+     * @param FilterInterface $filter
+     */
+    protected function filterHandle(FilterInterface $filter)
     {
-        $this->data = array_map(function($value) {
+        $this->data = array_map(function($value) use ($filter){
             $value = trim($value);
-            return is_array($value) ? $this->filter($value) : $this->filter->filter($value);
+            return is_array($value) ? $this->filter($value) : $filter->filter($value);
         },$this->data);
     }
 
+    /**
+     * @param $name
+     * @return mixed|null
+     */
     public function __get($name)
     {
         // TODO: Implement __get() method.
-        return $this->input($name);
-    }
-
-    public function __isset($name)
-    {
-        // TODO: Implement __isset() method.
         return $this->input($name);
     }
 

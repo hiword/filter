@@ -41,7 +41,7 @@ class FilterServiceProvider extends ServiceProvider
             $input = new Input($data);
 
             array_map(function ($value) use ($input){
-                $input->bind(new $value);
+                $input->filter(new $value);
             },$drives);
 
             return $input;

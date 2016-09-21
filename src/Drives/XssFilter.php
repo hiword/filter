@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Xss过滤
  * User: simon
  * Date: 2016/9/21
  * Time: 13:59
