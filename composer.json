@@ -12,17 +12,16 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "ezyang/htmlpurifier":"~4.6.0"
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-4": {
-            "Filter\\": "src/"
+            "Simon\\Filter\\": "src/"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }
