@@ -16,10 +16,11 @@ class Input
 
     protected $filter = null;
 
-    public function __construct(array $data,FilterInterface $filter)
+    public function __construct(array $data,FilterInterface $filter = null)
     {
-        $this->filter = $filter;
-        $this->data = $this->clean($data);
+        $this->data = $data;
+
+        if ($filter) $this->bind($filter);
     }
 
     public function all()
@@ -41,6 +42,28 @@ class Input
         return array_diff_key($this->data,$key);
     }
 
+    public function bind(FilterInterface $filter) : Input
+    {
+        $this->filter = $filter;
+
+        $this->filter();
+
+        return $this;
+    }
+
+    public function instance(array $data,FilterInterface $filter = null)
+    {
+        return new self($data,$filter);
+    }
+
+    protected function filter()
+    {
+        $this->data = array_map(function($value) {
+            $value = trim($value);
+            return is_array($value) ? $this->filter($value) : $this->filter->filter($value);
+        },$this->data);
+    }
+
     public function __get($name)
     {
         // TODO: Implement __get() method.
@@ -51,15 +74,6 @@ class Input
     {
         // TODO: Implement __isset() method.
         return $this->input($name);
-    }
-
-
-    protected function clean(array $data)
-    {
-        return array_map(function($value) use ($data){
-            $value = trim($value);
-            return is_array($value) ? $this->clean($value) : $this->filter->filter($value);
-        },$data);
     }
 
 }
