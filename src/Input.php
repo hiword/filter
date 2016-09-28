@@ -89,10 +89,19 @@ class Input
      */
     protected function filterHandle(FilterInterface $filter)
     {
-        $this->data = array_map(function($value) use ($filter){
-            $value = trim($value);
-            return is_array($value) ? $this->filter($value) : $filter->filter($value);
-        },$this->data);
+
+        foreach ($this->data as &$value)
+        {
+            if (is_array($value))
+            {
+                $this->filterHandle($filter);
+            }
+            else
+            {
+                $value = trim($value);
+                return $filter->filter($value);
+            }
+        }
     }
 
     /**
