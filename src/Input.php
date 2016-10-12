@@ -78,7 +78,7 @@ class Input
      * @param array $data
      * @return Input
      */
-    public function instance(array $data)
+    public function instance(array $data) : Input
     {
         return new self($data);
     }
@@ -89,7 +89,6 @@ class Input
      */
     protected function filterHandle(FilterInterface $filter)
     {
-
         foreach ($this->data as &$value)
         {
             if (is_array($value))
@@ -98,8 +97,7 @@ class Input
             }
             else
             {
-                $value = trim($value);
-                return $filter->filter($value);
+                $value = $filter->filter(trim($value));
             }
         }
     }
