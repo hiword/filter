@@ -68,7 +68,7 @@ class Input
      */
     public function filter(FilterInterface $filter) : Input
     {
-        $this->filterHandle($filter);
+        $this->data = $this->filterKernel($this->data,$filter);
 
         return $this;
     }
@@ -85,21 +85,25 @@ class Input
 
     /**
      * 过滤核心处理
+     * @param array $data
      * @param FilterInterface $filter
+     * @return array
      */
-    protected function filterHandle(FilterInterface $filter)
+    protected function filterKernel(array $data,FilterInterface $filter) : array
     {
-        foreach ($this->data as &$value)
+        foreach ($data as &$value)
         {
             if (is_array($value))
             {
-                $this->filterHandle($filter);
+                $value = $this->filterKernel($value,$filter);
             }
             else
             {
                 $value = $filter->filter(trim($value));
             }
         }
+
+        return $data;
     }
 
     /**
