@@ -1,9 +1,9 @@
 {
     "name": "simon/filter",
     "description": "filter xss or shell or other .",
-    "type": "library",
     "keywords": ["filter", "crcms","laravel","php"],
     "homepage": "https://github.com/hiword/filter",
+	"license": "MIT",
     "authors": [
         {
             "name": "simon",
